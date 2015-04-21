@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         clean: {
             build: ['build'],
             dev: {
-                src: ['build/app.js', 'build/<%= pkg.name %>.css', 'build/<%= pkg.name %>.js']
+                src: ['build/app.js', 'build/<%= pkg.name %>.css', 'build/<%= pkg.name %>.js', 'public/']
             },
             prod: ['dist']
         },
@@ -52,6 +52,13 @@ module.exports = function(grunt) {
                                 backbone: 'Backbone',
                                 underscore: '_'
                             }
+                        },
+                        bootstrap: {
+                            path: 'client/requires/bootstrap/bootstrap.js',
+                            exports: '',
+                            depends: {
+                                jquery: '$'
+                            }
                         }
                     }
                 }
@@ -83,8 +90,8 @@ module.exports = function(grunt) {
                 files: {
                     'build/<%= pkg.name %>.css': [
                         'client/styles/reset.css',
-                        'client/requires/*/css/*',
-                        'client/styles/less/main.less'
+                        'client/requires/*/*.css',
+                        'client/styles/less/*.less'
                     ]
                 }
             }
@@ -105,6 +112,9 @@ module.exports = function(grunt) {
                 }, {
                     src: 'client/img/*',
                     dest: 'public/img/'
+                },{
+                    src: 'bower_components/bootstrap/dist/css/bootstrap.css.map',
+                    dest: 'public/css/bootstrap.css.map'
                 }]
             },
             prod: {

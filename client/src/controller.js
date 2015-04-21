@@ -1,12 +1,17 @@
 var Marionette = require('backbone.marionette'),
     ContactsView = require('./views/contacts'),
     ContactDetailsView = require('./views/contact_details'),
-    AddContactView = require('./views/add');
+    AddContactView = require('./views/add'),
+    FooterView = require('./views/footer'),
+    HeaderView = require('./views/header');
 
 module.exports = Controller = Marionette.Controller.extend({
     initialize: function() {
         App.core.vent.trigger('app:log', 'Controller: Initializing');
         window.App.views.contactsView = new ContactsView({ collection: window.App.data.contacts });
+
+        $('#footer').html((new FooterView()).render().el);
+        $('#header').html((new HeaderView()).render().el);
     },
 
     home: function() {
